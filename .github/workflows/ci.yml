@@ -1,0 +1,34 @@
+name: CI Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Set Up Java
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'temurin'
+        java-version: '8'
+
+    - name: Set Up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Build
+      run: |
+        pip install -r requirements.txt
+
+    - name: Lint 
+      run: |
+        flake8 wine_quality_analysis.py tests/
+
+    - name: Test
+      run: |
+        pytest tests/
