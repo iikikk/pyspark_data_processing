@@ -25,7 +25,7 @@ def load_data(spark):
 
 def transform_data(red_wine_df, white_wine_df):
     """
-    Adds 'wine_type' and 'quality_category' columns 
+    Adds 'wine_type' and 'quality_category' columns
     and combines the DataFrames.
     """
     # Add 'wine_type' column
