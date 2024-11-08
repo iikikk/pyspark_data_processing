@@ -1,15 +1,11 @@
+import sys
+import os
 import unittest
 from pyspark.sql import SparkSession
-import os
 
 # Add the parent directory to sys.path
-sys.path.append(
-    os.path.abspath(
-        os.path.join(
-            os.path.dirname(__file__), ".."
-        )
-    )
-)
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from wine_quality_analysis import transform_data
 
 
