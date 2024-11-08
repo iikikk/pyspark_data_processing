@@ -35,6 +35,9 @@ jobs:
         with:
           python-version: '3.8'
 
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
       - name: Run Tests
         run: pytest tests/
 
@@ -49,6 +52,10 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.8'
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+        run: pip install flake8
 
       - name: Lint Code
         run: flake8 wine_quality_analysis.py tests/
