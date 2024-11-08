@@ -54,8 +54,7 @@ jobs:
           python-version: '3.8'
 
       - name: Install Dependencies
-        run: pip install -r requirements.txt
-        run: pip install flake8
+        run: pip install -r requirements.txt flake8
 
       - name: Lint Code
         run: flake8 wine_quality_analysis.py tests/
