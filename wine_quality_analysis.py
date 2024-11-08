@@ -25,7 +25,8 @@ def load_data(spark):
 
 def transform_data(red_wine_df, white_wine_df):
     """
-    Adds 'wine_type' and 'quality_category' columns and combines the DataFrames.
+    Adds 'wine_type' and 'quality_category' columns 
+    and combines the DataFrames.
     """
     # Add 'wine_type' column
     red_wine_df = red_wine_df.withColumn(
@@ -55,17 +56,17 @@ def perform_sql_query(spark, wine_df):
     # Execute SQL query
     avg_alcohol_df = spark.sql(
         """
-        SELECT 
-            wine_type, 
-            quality_category, 
+        SELECT
+            wine_type,
+            quality_category,
             ROUND(AVG(alcohol), 2) AS avg_alcohol
-        FROM 
+        FROM
             wine_table
-        GROUP BY 
-            wine_type, 
+        GROUP BY
+            wine_type,
             quality_category
-        ORDER BY 
-            wine_type, 
+        ORDER BY
+            wine_type,
             quality_category
     """
     )
