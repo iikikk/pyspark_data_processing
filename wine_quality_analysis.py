@@ -8,11 +8,17 @@ def load_data(spark):
     """
     # Read the red wine data
     red_wine_df = spark.read.csv(
-        "data/winequality-red.csv", header=True, sep=";", inferSchema=True
+        "data/winequality-red.csv",
+        header=True,
+        sep=";",
+        inferSchema=True,
     )
     # Read the white wine data
     white_wine_df = spark.read.csv(
-        "data/winequality-white.csv", header=True, sep=";", inferSchema=True
+        "data/winequality-white.csv",
+        header=True,
+        sep=";",
+        inferSchema=True,
     )
     return red_wine_df, white_wine_df
 
@@ -22,8 +28,12 @@ def transform_data(red_wine_df, white_wine_df):
     Adds 'wine_type' and 'quality_category' columns and combines the DataFrames.
     """
     # Add 'wine_type' column
-    red_wine_df = red_wine_df.withColumn("wine_type", lit("red"))
-    white_wine_df = white_wine_df.withColumn("wine_type", lit("white"))
+    red_wine_df = red_wine_df.withColumn(
+        "wine_type", lit("red")
+    )
+    white_wine_df = white_wine_df.withColumn(
+        "wine_type", lit("white")
+    )
     # Union the DataFrames
     wine_df = red_wine_df.union(white_wine_df)
     # Add 'quality_category' column
@@ -74,10 +84,16 @@ def save_output(avg_alcohol_df):
 
 
 def main():
-    spark = SparkSession.builder.appName("WineQualityAnalysis").getOrCreate()
+    spark = SparkSession.builder.appName(
+        "WineQualityAnalysis"
+    ).getOrCreate()
     red_wine_df, white_wine_df = load_data(spark)
-    wine_df = transform_data(red_wine_df, white_wine_df)
-    avg_alcohol_df = perform_sql_query(spark, wine_df)
+    wine_df = transform_data(
+        red_wine_df, white_wine_df
+    )
+    avg_alcohol_df = perform_sql_query(
+        spark, wine_df
+    )
     avg_alcohol_df.show()
     save_output(avg_alcohol_df)
     spark.stop()
