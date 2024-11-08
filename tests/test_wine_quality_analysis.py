@@ -21,28 +21,50 @@ class TestWineQualityAnalysis(unittest.TestCase):
         data_white = [(6.9, 8), (6.3, 4)]
         columns = ["alcohol", "quality"]
 
-        red_wine_df = self.spark.createDataFrame(data_red, columns)
-        white_wine_df = self.spark.createDataFrame(data_white, columns)
+        red_wine_df = self.spark.createDataFrame(
+            data_red, columns
+        )
+        white_wine_df = self.spark.createDataFrame(
+            data_white, columns
+        )
 
         # Transform data
-        wine_df = transform_data(red_wine_df, white_wine_df)
+        wine_df = transform_data(
+            red_wine_df, white_wine_df
+        )
 
         # Check if 'wine_type' column is added correctly
-        wine_types = wine_df.select("wine_type").distinct().collect()
-        wine_types = [row["wine_type"] for row in wine_types]
+        wine_types = (
+            wine_df.select("wine_type")
+            .distinct()
+            .collect()
+        )
+        wine_types = [
+            row["wine_type"] for row in wine_types
+        ]
         self.assertIn("red", wine_types)
         self.assertIn("white", wine_types)
 
         # Check if 'quality_category' is assigned correctly
-        expected_categories = {"Low", "Medium", "High"}
+        expected_categories = {
+            "Low",
+            "Medium",
+            "High",
+        }
         actual_categories = set(
             wine_df.select("quality_category")
             .rdd.flatMap(lambda x: x)
             .collect()
         )
-        self.assertTrue(expected_categories.issubset(actual_categories))
+        self.assertTrue(
+            expected_categories.issubset(
+                actual_categories
+            )
+        )
 
 
 if __name__ == "__main__":
-    sys.path.append('/home/runner/work/pyspark_data_processing/pyspark_data_processing')
+    sys.path.append(
+        "/home/runner/work/pyspark_data_processing/pyspark_data_processing"
+    )
     unittest.main()
