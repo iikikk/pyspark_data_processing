@@ -6,7 +6,7 @@ from pyspark.sql import SparkSession
 # Add the parent directory to sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from wine_quality_analysis import transform_data
+from wine_quality_analysis import transform_data  # noqa: E402
 
 
 class TestWineQualityAnalysis(unittest.TestCase):
