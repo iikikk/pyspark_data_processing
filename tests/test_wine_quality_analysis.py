@@ -1,6 +1,7 @@
 import unittest
 from pyspark.sql import SparkSession
 from wine_quality_analysis import transform_data
+import sys
 
 
 class TestWineQualityAnalysis(unittest.TestCase):
@@ -43,4 +44,5 @@ class TestWineQualityAnalysis(unittest.TestCase):
 
 
 if __name__ == "__main__":
+    sys.path.append('/home/runner/work/pyspark_data_processing/pyspark_data_processing')
     unittest.main()
